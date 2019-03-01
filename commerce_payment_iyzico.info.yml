@@ -1,0 +1,12 @@
+name: Commerce Payment IyziCO
+type: module
+description: 'Iyzico odeme sistemi'
+package: Commerce
+core: '8.x'
+dependencies:
+  - commerce:commerce_payment
+  - commerce:commerce_product
+config_devel:
+  install:
+    - field.field.profile.customer.field_identifier.yml
+    - field.storage.profile.field_identifier.yml
