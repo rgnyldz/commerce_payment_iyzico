@@ -3,20 +3,20 @@
 function commerce_payment_iyzico_install() {
 	$fields_names = ['field_identifier', 'field_telefon'];
 	foreach($fields_names as $field_name) {
-		$fields = \Drupal::entityManager()->getStorage('field_config')->loadByProperties(array('field_name' => $field_name));
+		$fields = \Drupal::entityTypeManager()->getStorage('field_config')->loadByProperties(array('field_name' => $field_name));
 		foreach ($fields as $field) {
 		$properties = array(
 		        'targetEntityType' => $field->getTargetEntityTypeId(),
 		        'bundle' => $field->getTargetBundle()
 		);
-		if ($form_displays = \Drupal::entityManager()->getStorage('entity_form_display')->loadByProperties($properties)) {
+		if ($form_displays = \Drupal::entityTypeManager()->getStorage('entity_form_display')->loadByProperties($properties)) {
 		        foreach ($form_displays as $form_display) {
 		        $form_display->setComponent($field_name, array('type' => 'string_textfield', 'settings' => array('size' => '11')));
 		        $form_display->save();
 		        }
 		      }
 		}
-		if ($view_displays = \Drupal::entityManager()->getStorage('entity_view_display')->loadByProperties($properties)) {
+		if ($view_displays = \Drupal::entityTypeManager()->getStorage('entity_view_display')->loadByProperties($properties)) {
         foreach ($view_displays as $view_display) {
              $view_display->setComponent($field_name, array('type' => 'string', 'settings' => array()));
              $view_display->save();
